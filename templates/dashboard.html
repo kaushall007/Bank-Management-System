@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='dashboard.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome, {{ name }}</h1>
+        <p>This is your dashboard. Here's some information about your account:</p>
+        <ul>
+            <li><strong>Account Number:</strong> {{ accNo }}</li>
+            
+            <li><strong>Last Login:</strong> {{ last_login }}</li>
+        </ul>
+        <p>You can perform various actions from here:</p>
+        <ul>
+            <li><a href="{{ url_for('deposit_funds') }}">Deposit Funds</a></li>
+            <li><a href="{{ url_for('withdraw_funds') }}">Withdraw Funds</a></li>
+            <li><a href="#">View Transactions</a></li>
+            <li><a href="{{url_for('check_balance')}}">Check Balance</a></li>
+        </ul> 
+    </div>
+</body>
+</html>

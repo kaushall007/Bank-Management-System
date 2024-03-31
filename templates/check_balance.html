@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Check Balance</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='check_balance.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Check Balance</h1>
+        <form action="/check_balance" method="POST">
+            <label for="accNo">Account Number:</label>
+            <input type="text" id="accNo" name="accNo" required><br><br>
+            <label for="pin">PIN:</label>
+            <input type="password" id="pin" name="pin" required><br><br>
+            <button type="submit">Check Balance</button>
+        </form>
+        {% if balance is defined %}
+        <p>Your balance is: {{ balance }}</p>
+        {% endif %}
+        {% if error_message %}
+        <p class="error-message">{{ error_message }}</p>
+        {% endif %}
+    </div>
+</body>
+</html>

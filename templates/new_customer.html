@@ -1,0 +1,42 @@
+<!-- templates/new_customer.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Create a New Account</h1>
+        <form action="{{ url_for('create_account') }}" method="POST">
+            <label for="phoneNo">Contact Number:</label>
+            <input type="tel" id="phoneNo" name="phoneNo" pattern="[0-9]{10}" required><br><br>
+            
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required><br><br>
+            
+            <label for="address">Address:</label>
+            <input type="text" id="address" name="address" required><br><br>
+            
+            <label>Account Type:</label><br>
+            <input type="radio" id="current" name="account_type" value="C" required>
+            <label for="current">Current</label><br>
+            
+            <input type="radio" id="savings" name="account_type" value="S">
+            <label for="savings">Savings</label><br><br>
+            
+            <label for="pin">Security PIN (4 digits):</label>
+            <input type="password" id="pin" name="pin" minlength="4" maxlength="4" required><br><br>
+            
+            <label for="initial_amount">Initial Amount:</label>
+            <input type="number" id="initial_amount" name="initial_amount" min="0" required><br><br>
+            
+            <input type="submit" value="Create Account">
+        </form>
+        <p>Already have an account? <a href="{{ url_for('login') }}">Login here</a></p>
+    </div>
+</body>
+</html>

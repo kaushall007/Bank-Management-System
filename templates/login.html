@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form action="{{ url_for('authenticate') }}" method="POST">
+            <div class="form-group">
+                <label for="accNo">Account Number:</label>
+                <input type="text" id="accNo" name="accNo" required>
+            </div>
+            <div class="form-group">
+                <label for="pin">PIN (4 digits):</label>
+                <input type="password" id="pin" name="pin" minlength="4" maxlength="4" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        {% if options %}
+        <div class="options-container">
+            <h3>Options:</h3>
+            <form action="{{ url_for('login_action') }}" method="POST">
+                <input type="hidden" id="accNo" name="accNo" value="{{ accNo }}">
+                <input type="hidden" id="pin" name="pin" value="{{ pin }}">
+                <label for="choice">Select an option:</label>
+                <select id="choice" name="choice">
+                    <option value="1">Deposit Amount</option>
+                    <option value="2">Withdraw Amount</option>
+                    <option value="3">Check Balance</option>
+                    <option value="4">Show My Details</option>
+                    <option value="5">Modify My Account</option>
+                    <option value="6">Close My Account</option>
+                    <option value="7">Exit</option>
+                </select>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+</body>
+</html>
