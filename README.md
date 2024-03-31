@@ -8,7 +8,7 @@ The Flask Banking System is a web-based application designed to facilitate accou
 <img src="snapshots/Screenshot (129).png">
 <img src="snapshots/Screenshot (130).png">
 
-##Key Features:
+<h2>Key Features:</h2>
 
 1.Account Creation: New customers can create accounts by providing their contact information, name, address, selecting an account type (current or savings), and setting a security PIN.
 
@@ -24,7 +24,7 @@ The Flask Banking System is a web-based application designed to facilitate accou
 
 7.Transaction History: The application keeps a record of transactions for each account, allowing customers to view their transaction history.
 
-##Technologies Used:
+<h2>Technologies Used:</h2>
 
 Flask: Flask is a lightweight web application framework written in Python used for building web applications.
 
@@ -37,4 +37,3 @@ CSV File: Account information is stored and retrieved from a CSV file.
 Pickling: Python's pickle module is used for serializing and deserializing Python objects to and from a file.
 
 Overall, the Flask Banking System provides a basic yet functional interface for managing bank accounts and conducting transactions online.
-
