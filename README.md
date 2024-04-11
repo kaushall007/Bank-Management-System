@@ -6,7 +6,6 @@ The Flask Banking System is a web-based application designed to facilitate accou
 <img src="snapshots/Screenshot (127).png">
 <img src="snapshots/Screenshot (128).png">
 <img src="snapshots/Screenshot (129).png">
-<img src="snapshots/Screenshot (130).png">
 <img src="snapshots/image.png">
 
 
