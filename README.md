@@ -8,8 +8,6 @@ The Flask Banking System is a web-based application designed to facilitate accou
 <img src="snapshots/Screenshot (129).png">
 <img src="snapshots/Screenshot (130).png">
 <img src="snapshots/image.png">
-
-
 <h2>Key Features:</h2>
 
 1.Account Creation: New customers can create accounts by providing their contact information, name, address, selecting an account type (current or savings), and setting a security PIN.
