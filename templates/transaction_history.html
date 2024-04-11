@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Transaction History</title>
+</head>
+<body>
+    <h1>Transaction History</h1>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Sender Account</th>
+            <th>Recipient Account</th>
+            <th>Amount</th>
+        </tr>
+        {% for transaction in transactions %}
+        <tr>
+            <td>{{ transaction['date'] }}</td>
+            <td>{{ transaction['sender_accNo'] }}</td>
+            <td>{{ transaction['recipient_accNo'] }}</td>
+            <td>{{ transaction['amount'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>

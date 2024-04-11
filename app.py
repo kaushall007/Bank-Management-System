@@ -101,15 +101,89 @@ def getAccountByAccNo(accNo):
     return None
 
 #dashboard features functions
-@app.route('/deposit_funds', methods=['GET', 'POST'])
-def deposit_funds():
+@app.route('/send_funds', methods=['GET', 'POST'])
+def send_funds():
     if request.method == 'POST':
-        
+        sender_accNo = request.form.get('sender_accNo')
+        recipient_accNo = request.form.get('recipient_accNo')
+        pin = request.form.get("pin")
         amount = int(request.form.get('amount'))
-        account = Account()  
-        account.deposit += amount  
-        return redirect(url_for('dashboard'))  
-    return render_template('deposit_funds.html')  
+        accounts = readAccountsFromCSV()
+        sender_account = None
+        recipient_account = None
+        for account in accounts:
+            if account.accNo == sender_accNo and account.pin == pin:
+                sender_account = account
+            elif account.accNo == recipient_accNo:
+                recipient_account = account
+
+        if sender_account and recipient_account:
+            sender_deposit = int(sender_account.deposit)
+            if sender_deposit >= amount:
+                sender_account.deposit = str(sender_deposit - amount)
+                recipient_account.deposit = str(int(recipient_account.deposit) + amount)
+                update_account_balances(sender_account, recipient_account)
+
+                # Write transaction data to CSV
+                write_transaction_to_csv(sender_accNo, recipient_accNo, amount)
+
+                return render_template('dashboard.html')
+            else:
+                return "Insufficient balance"
+        else:
+            return "Invalid sender or recipient account number"
+
+    return render_template('send_funds.html')
+
+
+def write_transaction_to_csv(sender_accNo, recipient_accNo, amount):
+    transaction_data = [time.ctime(), sender_accNo, recipient_accNo, str(amount)]
+    with open('transactions.csv', mode='a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerow(transaction_data)
+
+
+
+
+
+def update_account_balances(sender_account, recipient_account):
+    file_path = 'accounts.csv'
+    temp_file_path = 'temp_accounts.csv'
+    with open(file_path, mode='r') as file, open(temp_file_path, mode='w', newline='') as temp_file:
+        reader = csv.reader(file)
+        writer = csv.writer(temp_file)
+        for row in reader:
+            if row[0] == sender_account.accNo:
+                row[-1] = str(sender_account.deposit)
+            elif row[0] == recipient_account.accNo:
+                row[-1] = str(recipient_account.deposit)
+            writer.writerow(row)
+    os.replace(temp_file_path, file_path)
+    
+    
+    
+@app.route('/transaction_history')
+def transaction_history():
+    transactions = read_transactions_from_csv()  # Retrieve transaction history data
+    return render_template('transaction_history.html', transactions=transactions)
+
+def read_transactions_from_csv():
+    transactions = []
+    file_path = 'transactions.csv'  # Assuming transactions are stored in a file named transactions.csv
+    if os.path.exists(file_path):
+        with open(file_path, mode='r') as file:
+            reader = csv.reader(file)
+            for row in reader:
+                # Assuming the structure of each row is [date, sender_accNo, recipient_accNo, amount]
+                transaction = {
+                    'date': row[0],
+                    'sender_accNo': row[1],
+                    'recipient_accNo': row[2],
+                    'amount': row[3]
+                }
+                transactions.append(transaction)
+    return transactions
+
 
 
 @app.route('/withdraw_funds', methods=['GET', 'POST'])
@@ -156,6 +230,17 @@ def readAccountsFromCSV():
                 else:
                     print(f"Invalid row: {row}")
     return accounts
+
+
+
+##logout
+@app.route('/logout')
+def logout():
+    # Clear session data or perform any other logout-related tasks
+    # For example, if you're using Flask-Login, you can call logout_user()
+
+    # Redirect the user to the login page
+    return redirect(url_for('login'))
 
 if __name__ == '__main__':
     app.run(debug=True)
