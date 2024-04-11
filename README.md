@@ -7,6 +7,8 @@ The Flask Banking System is a web-based application designed to facilitate accou
 <img src="snapshots/Screenshot (128).png">
 <img src="snapshots/Screenshot (129).png">
 <img src="snapshots/Screenshot (130).png">
+<img src="snapshots/Screenshot (130).png">
+![image](https://github.com/kaushall007/Bank-Management-System/assets/131538982/6c3ad251-00e4-44f9-82a4-c284f5ed7dcf)
 
 <h2>Key Features:</h2>
 
